@@ -35,6 +35,9 @@ export default class App extends Component {
         <Text style={styles.instructions}>Tamanho da grade:
           {params.getRowsAmount()}x{params.getColumnsAmount()}
         </Text>
+        <View style={styles.board}>
+          <MineField board={this.state.board} />
+        </View>
 
         <StatusBar style="auto" />
       </View>
@@ -45,8 +48,10 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end'
   },
+  board: {
+    alignItems: 'center',
+    backgroundColor: '#AAA'
+  }
 });
