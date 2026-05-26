@@ -9,14 +9,30 @@ import {
     TouchableWithoutFeedback
 } from 'react-native'
 
+import DateTimePicker from '@react-native-community/datetimepicker'
+
 import commonStyles from "../commonStyles";
 
-const initialState = { desc: ''}
+import moment from 'moment'
+import 'moment/locale/pt-br'
+
+const initialState = { desc: '', date: new Date()}
 
 export default class AddTask extends Component {
 
     state = {
         ...initialState
+    }
+
+    getDatePicker = () => {
+        let datePicker = <DateTimePicker 
+            value={this.state.date}
+            onChange={(_, date) => this.setState({ date })}
+            mode='date'/>
+
+        const dateString = moment(this.state.date).format('ddd, D [de] MMMM [de] YYYY')
+
+        return datePicker
     }
 
     render () {
@@ -35,8 +51,10 @@ export default class AddTask extends Component {
                         placeholder="Informe a Descrição..."
                         onChangeText={desc => this.setState({ desc })}
                         value={this.state.desc}/>
+                    {this.getDatePicker()}
                     <View style={styles.buttons}>
-                        <TouchableOpacity onPress={this.props.onCancel}>
+                        <TouchableOpacity onPress={this.props.onCancel
+                        }>
                             <Text style={styles.button}>Cancelar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity>
